@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import 'firebase/firestore';
 const axios = require('axios')
 
-const greenhouseAuth = 'NGMyYTQwN2I4OWRjNjhlNzk2NThiNGMyYjMxNmZmNDMtMzo';
+const greenhouseAuth = '';
 const greenhouseUrl = 'https://harvest.greenhouse.io';
 
 async function getGreenhouseData() {
