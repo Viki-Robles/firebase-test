@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -37,25 +37,15 @@ const CssTextField = withStyles({
 export default function SignupForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState([]);
     const emailRef = useRef();
-    const repeatPasswordRef = useRef();
     const passwordRef = useRef();
     const { signup } = useAuth();
     const history = useHistory();
     const classes = useStyles();
-    useDidUpdateEffect(processPassword, [password]);
 
-    function useDidUpdateEffect(fn, inputs) {
-        const didMountref = useRef(false);
-        useEffect(() => {
-            if (didMountref.current) fn();
-            else didMountref.current = true
-        }, inputs)
-    }
+
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -73,14 +63,7 @@ export default function SignupForm() {
         }
         setLoading(false)
     }
-//Password Processing
-function processPassword() {
-    const validatepasswordRequirements = new RegExp(/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{7,})/g);
-    const isValid = password.match(validatepasswordRequirements);
 
-    if (!isValid) return setErrors(['your passwrod is not correct'])
-    else setErrors([])
-}
     return (
         <Container component='main' maxWidth='xs' className={classes.container}>
             <div className={classes.paper}>
