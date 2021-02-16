@@ -9,7 +9,7 @@ import { styles } from './Signup.styles';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../Contents/Auth';
 import { Alert, AlertTitle } from '@material-ui/lab';
-
+import Candidate from '../Candidate/Candidate';
 
 const useStyles = makeStyles(styles);
 const CssTextField = withStyles({
@@ -44,7 +44,7 @@ export default function SignupForm() {
     const { signup } = useAuth();
     const history = useHistory();
     const classes = useStyles();
-
+    
 
 
     async function handleSubmit(e) {
