@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import firebase from '../firebase';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +10,9 @@ import { styles } from './Signup.styles';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../Contents/Auth';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import Candidate from '../Candidate/Candidate';
+import axios from 'axios';
+import 'firebase/firestore';
+
 
 const useStyles = makeStyles(styles);
 const CssTextField = withStyles({
@@ -39,17 +42,31 @@ export default function SignupForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [candidateId, setCandidatetId] = useState(null);
     const emailRef = useRef();
     const passwordRef = useRef();
     const { signup } = useAuth();
     const history = useHistory();
     const classes = useStyles();
-    
 
+    const firebaseUrl = 'http://fir-test-b1e99.firebaseio.com'
+    const firebaseRef = firebase.firestore().collection('candidates');
+    console.log(firebaseRef);
+    
+    useEffect(() => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ first_name: 'Mimi' })
+        };
+        fetch(firebaseRef, requestOptions)
+            .then(response => response.json())
+            .then(data => setCandidatetId(data));
+    }, []);
 
     async function handleSubmit(e) {
         e.preventDefault()
-    
+
         if (!passwordRef.current.value) {
             return setError('Passwords do not match')
         }
@@ -63,6 +80,8 @@ export default function SignupForm() {
         }
         setLoading(false)
     }
+
+    
 
     return (
         <Container component='main' maxWidth='xs' className={classes.container}>
@@ -124,6 +143,13 @@ export default function SignupForm() {
                         </Grid>
                     </Grid>
                 </form>
+                {
+                    candidates.map(({ candidates }) => (
+                        <div>
+                            {candidates}
+                        </div>
+                    ))
+                }
             </div>
         </Container>
 

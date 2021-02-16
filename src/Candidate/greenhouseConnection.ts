@@ -1,18 +1,17 @@
-import {dbInterface, Candidate} from './Candidate';
+import {dbInterface, Candidate} from './candidate';
 import { AxiosResponse } from 'axios';
-import axios from 'axios';
-
+import 'firebase/firestore';
+const axios = require('axios')
 
 const greenhouseAuth = 'NGMyYTQwN2I4OWRjNjhlNzk2NThiNGMyYjMxNmZmNDMtMzo';
 const greenhouseUrl = 'https://harvest.greenhouse.io';
-
 
 async function getGreenhouseData() {
   return axios.get(`${greenhouseUrl}/v1/candidates?per_page=500`, {
     headers: {
       Authorization: greenhouseAuth
     }
-  });
+  })
 }
 
 
