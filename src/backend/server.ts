@@ -1,10 +1,14 @@
 import {dbInterface, Candidate} from './candidate';
 import { AxiosResponse } from 'axios';
-import 'firebase/firestore';
-const axios = require('axios')
+const axios = require('axios');
+const express = require('express');
+const app = express();
+const port = 3001;
+var async = require("async");
 
 const greenhouseAuth = '';
 const greenhouseUrl = 'https://harvest.greenhouse.io';
+
 
 async function getGreenhouseData() {
   return axios.get(`${greenhouseUrl}/v1/candidates?per_page=500`, {
@@ -14,6 +18,13 @@ async function getGreenhouseData() {
   })
 }
 
+async function iterateData(getGreenhouseData, item){
+ 
+ 
+ 
+}
+
+  
 
 export function main(start: string = 'string'): Promise<AxiosResponse<any>> {
   console.log(`main: ${start}`);
@@ -36,3 +47,8 @@ main('Go!!').then(data => {
   }
   console.log('DONE');
 });
+
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
