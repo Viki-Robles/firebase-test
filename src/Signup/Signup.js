@@ -10,8 +10,6 @@ import { styles } from './Signup.styles';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../Contents/Auth';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import axios from 'axios';
-import 'firebase/firestore';
 
 
 const useStyles = makeStyles(styles);
@@ -143,13 +141,7 @@ export default function SignupForm() {
                         </Grid>
                     </Grid>
                 </form>
-                {
-                    candidates.map(({ candidates }) => (
-                        <div>
-                            {candidates}
-                        </div>
-                    ))
-                }
+              
             </div>
         </Container>
 

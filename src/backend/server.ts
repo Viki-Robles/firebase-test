@@ -4,7 +4,6 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 const port = 3001;
-var async = require("async");
 
 const greenhouseAuth = '';
 const greenhouseUrl = 'https://harvest.greenhouse.io';
@@ -18,11 +17,11 @@ async function getGreenhouseData() {
   })
 }
 
-async function iterateData(getGreenhouseData, item){
+// async function iterateData(getGreenhouseData, item){
  
  
  
-}
+// }
 
   
 
